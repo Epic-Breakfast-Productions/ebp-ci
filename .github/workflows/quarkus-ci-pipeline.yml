@@ -69,6 +69,10 @@ jobs:
     name: Unit Tests
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: read
     steps:
       - name: Harden runner
         uses: step-security/harden-runner@fa2e9d605c4eeb9fcad4c99c224cee0c6c7f3594
@@ -141,6 +145,10 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: ${{ inputs.run-int-tests }}
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: read
     steps:
       - name: Harden runner
         uses: step-security/harden-runner@fa2e9d605c4eeb9fcad4c99c224cee0c6c7f3594
