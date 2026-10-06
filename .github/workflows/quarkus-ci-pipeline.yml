@@ -102,6 +102,7 @@ jobs:
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
     - name: Run manual build steps
       if: matrix.build-mode == 'manual'
+      working-directory: ${{ inputs.path }}
       shell: bash
       run: |
         echo 'If you are using a "manual" build mode for one or more of the' \
@@ -113,6 +114,7 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v4
+      working-directory: ${{ inputs.path }}
       with:
         category: "/language:${{matrix.language}}"
 
