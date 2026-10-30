@@ -143,6 +143,14 @@ jobs:
           path: ${{ inputs.path }}/build/reports/tests/test
           retention-days: 7
 
+      - name: Archive UI test results
+        uses: actions/upload-artifact@v4
+        if: ${{ hashFiles(format('{0}/build/test-results/ui/**', inputs.path)) != '' }}
+        with:
+          name: unit-test-report
+          path: ${{ inputs.path }}/build/test-results/ui/
+          retention-days: 7
+
 
   int-test:
     name: Integration Tests
