@@ -3,6 +3,10 @@ name: WF - Quarkus CI Pipeline
 on:
   workflow_call:
     inputs:
+      project-name:
+        description: The name of the project to use in reporting
+        required: true
+        type: string
       path:
         description: 'Path to the service root relative to repo root (e.g. software/core/oqm-core-api)'
         required: true
@@ -118,7 +122,7 @@ jobs:
           # quarkus-jacoco writes its XML report here (not the standard Gradle jacoco path)
           paths: ${{ inputs.path }}/build/jacoco-report/jacoco.xml
           token: ${{ secrets.GITHUB_TOKEN }}
-          title: Code Coverage
+          title: Code Coverage - ${{ inputs.project-name }}
           min-coverage-overall: ${{ inputs.jacoco-min-coverage-overall }}
           min-coverage-changed-files: ${{ inputs.jacoco-min-coverage-changed }}
           update-comment: true
