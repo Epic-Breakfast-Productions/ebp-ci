@@ -151,8 +151,8 @@ jobs:
         uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: unit-test-report-ui
-          path: ${{ inputs.path }}/build/test-results/ui/
+          name: unit-test-report-addendum
+          path: ${{ inputs.path }}/build/test-results/addendum/
           retention-days: 7
           if-no-files-found: ignore
 
@@ -217,8 +217,8 @@ jobs:
         uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: int-test-report-ui
-          path: ${{ inputs.path }}/build/test-results/ui/
+          name: int-test-report-addendum
+          path: ${{ inputs.path }}/build/test-results/addendum/
           retention-days: 7
           if-no-files-found: ignore
           
