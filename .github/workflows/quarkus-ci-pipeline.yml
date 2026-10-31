@@ -108,12 +108,16 @@ jobs:
         run: ./gradlew test
 
       - name: Publish unit test results
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v3
         if: always()
         with:
           name: Unit Test Results
           path: ${{ inputs.path }}/build/test-results/test/*.xml
           reporter: java-junit
+          list-tests: 'failed'
+          fail-on-error: 'false'
+          
+          
 
       - name: Check JaCoCo coverage
         uses: madrapps/jacoco-report@v1.8.0
@@ -191,12 +195,14 @@ jobs:
         run: ./gradlew quarkusIntTest -x test -Pquarkus.container-image.build=${{ inputs.container-based-int-tests }}
 
       - name: Publish integration test results
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v3
         if: always()
         with:
           name: Integration Test Results
           path: ${{ inputs.path }}/build/test-results/quarkusIntTest/*.xml
           reporter: java-junit
+          list-tests: 'failed'
+          fail-on-error: 'false'
 
       - name: Archive integration test report
         uses: actions/upload-artifact@v4
