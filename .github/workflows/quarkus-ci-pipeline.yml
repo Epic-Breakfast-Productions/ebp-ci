@@ -147,7 +147,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: ${{ always() && ( hashFiles(format('{0}/build/test-results/ui/**', inputs.path)) != '' ) }}
         with:
-          name: unit-test-report
+          name: unit-test-report-ui
           path: ${{ inputs.path }}/build/test-results/ui/
           retention-days: 7
 
@@ -210,6 +210,6 @@ jobs:
         uses: actions/upload-artifact@v4
         if: ${{ always() && ( hashFiles(format('{0}/build/test-results/ui/**', inputs.path)) != '' ) }}
         with:
-          name: unit-test-report
+          name: int-test-report-ui
           path: ${{ inputs.path }}/build/test-results/ui/
           retention-days: 7
