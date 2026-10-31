@@ -93,7 +93,7 @@ jobs:
             jcenter.bintray.com:443
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup runner
         uses: Epic-Breakfast-Productions/ebp-ci/.github/actions/setup-quarkus-runner@main
@@ -132,7 +132,7 @@ jobs:
           update-comment: true
 
       - name: Archive coverage report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: coverage-report
@@ -140,7 +140,7 @@ jobs:
           retention-days: 7
 
       - name: Archive unit test report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: unit-test-report
@@ -148,12 +148,13 @@ jobs:
           retention-days: 7
 
       - name: Archive UI unit test results
-        uses: actions/upload-artifact@v4
-        if: ${{ always() && ( hashFiles(format('{0}/build/test-results/ui/**', inputs.path)) != '' ) }}
+        uses: actions/upload-artifact@v7
+        if: always()
         with:
           name: unit-test-report-ui
           path: ${{ inputs.path }}/build/test-results/ui/
           retention-days: 7
+          if-no-files-found: ignore
 
 
   int-test:
@@ -205,7 +206,7 @@ jobs:
           fail-on-error: 'false'
 
       - name: Archive integration test report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: int-test-report
@@ -213,9 +214,11 @@ jobs:
           retention-days: 7
           
       - name: Archive UI integration test results
-        uses: actions/upload-artifact@v4
-        if: ${{ always() && ( hashFiles(format('{0}/build/test-results/ui/**', inputs.path)) != '' ) }}
+        uses: actions/upload-artifact@v7
+        if: always()
         with:
           name: int-test-report-ui
           path: ${{ inputs.path }}/build/test-results/ui/
           retention-days: 7
+          if-no-files-found: ignore
+          
